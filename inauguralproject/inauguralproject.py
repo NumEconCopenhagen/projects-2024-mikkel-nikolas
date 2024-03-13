@@ -14,11 +14,18 @@ def square(x):
     y = x**2
     return y
 
+alpha = 1/3
+beta = 2/3
 
 
+w1A = 0.8
+w2A = 0.3
+p2 = 1
+w1B = 1-w1A
+w2B = 1-w2A
 from types import SimpleNamespace
 
-class ExchangeEconomyClass:
+class inauguralprojectClass:
 
     def __init__(self):
 
@@ -31,18 +38,22 @@ class ExchangeEconomyClass:
         # b. endowments
         par.w1A = 0.8
         par.w2A = 0.3
+        par.p2 = 1
 
     def utility_A(self,x1A,x2A):
-        pass
+        uA = x1A**alpha*x2A**(1-alpha)
 
     def utility_B(self,x1B,x2B):
-        pass
+        uB = x1B**beta*x2B**(1-beta)
 
     def demand_A(self,p1):
-        pass
+        IA = p1*w1A+p2*w2A
+        return alpha*IA/p1
 
     def demand_B(self,p1):
-        pass
+        IB = p1*w1B+p2*w2B
+        return beta*IB/p2
+
 
     def check_market_clearing(self,p1):
 
