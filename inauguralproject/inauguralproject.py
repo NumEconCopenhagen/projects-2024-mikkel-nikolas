@@ -13,6 +13,8 @@ def square(x):
     
     y = x**2
     return y
+#test
+z=1
 
 alpha = 1/3
 beta = 2/3
