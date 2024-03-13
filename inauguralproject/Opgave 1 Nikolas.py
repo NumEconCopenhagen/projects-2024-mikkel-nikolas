@@ -9,7 +9,7 @@ w1B = 1-w1A
 w2B = 1-w2A
 from types import SimpleNamespace
 
-class inauguralprojectClass:
+class InauguralprojectClass:
 
     def __init__(self):
 
