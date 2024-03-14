@@ -24,6 +24,11 @@ class InauguralprojectClass:
     def demand_B(self, p1):
         return (self.beta * ((p1 * self.w1B + self.p2 * self.w2B) / p1),
                 (1 - self.beta) * ((p1 * self.w1B + self.p2 * self.w2B) / self.p2))
+        
+    def negative_utility_A(self, p1):
+        # Utility function but returns negative for optimization
+        x1A, x2A = self.demand_A(p1)
+        return -self.utility_A(x1A, x2A)
 
     def epsilons(self, p1):
         x1A, x2A = self.demand_A(p1)
