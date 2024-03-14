@@ -1,47 +1,33 @@
 from types import SimpleNamespace
 
-class InauguralprojectClass:
 
-    def __init__(self):
+class ExchangeEconomy:
+    def __init__(self, alpha=1/3, beta=2/3, w1A=0.8, w2A=0.3, p2=1):
+        self.alpha = alpha
+        self.beta = beta
+        self.w1A = w1A
+        self.w2A = w2A
+        self.w1B = 1 - w1A
+        self.w2B = 1 - w2A
+        self.p2 = p2
 
-        par = self.par = SimpleNamespace()
+    def utility_A(self, x1A, x2A):
+        return x1A**self.alpha * x2A**(1-self.alpha)
 
-        # a. preferences
-        par.alpha = 1/3
-        par.beta = 2/3
+    def utility_B(self, x1B, x2B):
+        return x1B**self.beta * x2B**(1-self.beta)
 
-        # b. endowments
-        par.w1A = 0.8
-        par.w2A = 0.3
-        par.w1B = 1-self.par.w1A
-        par.w2B = 1-self.par.w2A
-        par.p2 = 1
+    def demand_A(self, p1):
+        return (self.alpha * ((p1 * self.w1A + self.p2 * self.w2A) / p1),
+                (1 - self.alpha) * ((p1 * self.w1A + self.p2 * self.w2A) / self.p2))
 
-    def utility_A(self,x1A,x2A):
-        return x1A**self.par.alpha*x2A**(1-self.par.alpha)
-        
+    def demand_B(self, p1):
+        return (self.beta * ((p1 * self.w1B + self.p2 * self.w2B) / p1),
+                (1 - self.beta) * ((p1 * self.w1B + self.p2 * self.w2B) / self.p2))
 
-    def utility_B(self,x1B,x2B):
-        return x1B**self.par.beta*x2B**(1-self.par.beta)
-        
-
-    def demand_A(self,p1):
-        return self.par.alpha((p1*self.par.w1A+self.par.p2*self.par.w2A)/p1)
-        
-
-    def demand_B(self,p1):
-        return (1-self.par.alpha)((p1*self.par.w1B+self.par.p2*self.par.w2B)/p2)
-
-
-    def check_market_clearing(self,p1):
-
-        par = self.par
-        
-
-        x1A,x2A = self.demand_A(p1)
-        x1B,x2B = self.demand_B(p1)
-
-        eps1 = x1A-par.w1A + x1B-(1-par.w1A)
-        eps2 = x2A-par.w2A + x2B-(1-par.w2A)
-
-        return eps1,eps2
+    def epsilons(self, p1):
+        x1A, x2A = self.demand_A(p1)
+        x1B, x2B = self.demand_B(p1)
+        eps1 = x1A - self.w1A + x1B - self.w1B
+        eps2 = x2A - self.w2A + x2B - self.w2B
+        return eps1, eps2
