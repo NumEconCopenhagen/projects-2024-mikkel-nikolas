@@ -1,7 +1,7 @@
 from types import SimpleNamespace
 
 
-class ExchangeEconomy:
+class InauguralprojectClass:
     def __init__(self, alpha=1/3, beta=2/3, w1A=0.8, w2A=0.3, p2=1):
         self.alpha = alpha
         self.beta = beta
