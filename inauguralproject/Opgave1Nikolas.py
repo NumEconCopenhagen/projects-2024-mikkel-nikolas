@@ -19,7 +19,7 @@ class InauguralprojectClass:
 
     def demand_A(self, p1):
         return (self.alpha * ((p1 * self.w1A + self.p2 * self.w2A) / p1),
-                (1 - self.alpha) * ((p1 * self.w1A + self.p2 * self.w2A) / self.p2))
+                 (1-self.alpha) * ((p1 * self.w1A + self.p2 * self.w2A) / self.p2))
 
     def demand_B(self, p1):
         return (self.beta * ((p1 * self.w1B + self.p2 * self.w2B) / p1),
