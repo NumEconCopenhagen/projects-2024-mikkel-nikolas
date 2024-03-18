@@ -1,9 +1,9 @@
-# \[Group name\]
+# \[Mikkel&Nikolas\]
 
 **Group members:**
-- A
-- B
-- C
+- Mikkel Friis (ZVG359)
+- Nikolas Lindgaard (RLW277)
+- 
 
 This repository contains  
 1. Inaugural project. 
