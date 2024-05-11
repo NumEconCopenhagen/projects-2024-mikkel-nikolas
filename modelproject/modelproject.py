@@ -44,7 +44,6 @@ class ASAD:
             self.yhat_vec.append(yhat)
             self.pihat_vec.append(pihat)
             self.t_vec.append(t)
-         
     def plot_results(self): 
         
         plt.figure(figsize=(10, 6))
@@ -86,7 +85,8 @@ class ASAD:
         # The case for short-term shocks
         if self.s_duration < self.T:
             
-            plt.axhline(y=0, color='black', linestyle=':', label='Long Run Inflation-Gap = 0')            for t in range(self.T): #plotting AD curve for each period
+            plt.axhline(y=0, color='black', linestyle=':', label='Long Run Inflation-Gap = 0')           
+            for t in range(self.T): #plotting AD curve for each period
                 
                 ad_curve_t = ad_function(self.alpha, y_values, t, self.z, self.z_duration)
                 plt.plot(y_values, ad_curve_t, color="green")
