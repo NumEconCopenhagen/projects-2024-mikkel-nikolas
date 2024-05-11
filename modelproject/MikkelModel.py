@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class ASAD:
-    def __init__(self, T, alpha=0.7, gamma=0.075, tol=0.01, z=0, s=0, z_duration=0, s_duration=0):
+    def __init__(self, T, alpha=0.6, gamma=0.08, tol=0.01, z=0, s=0, z_duration=0, s_duration=0):
         self.alpha = alpha
         self.gamma = gamma
         self.tol = tol
