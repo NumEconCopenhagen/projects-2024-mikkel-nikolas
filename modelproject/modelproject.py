@@ -16,17 +16,6 @@ class ASAD:
         
     def solve_model(self):
         
-        """ Solves the model using the initial values for the parameters 
-        
-        args: 
-        self (class): class with initial values for the parameters
-        
-        Returns:
-        self.yhat_vec (list): list of output gaps
-        self.pihat_vec (list): list of inflation gaps
-        self.t_vec (list): list of periods
-        
-        """
         # a. Create empty lists
         
         self.yhat_vec = []
@@ -69,28 +58,7 @@ class ASAD:
         
     def plot_ad_as(self):
         
-        """ Creating and plotting the AD and AS curves of the given output and inflation gaps
-        args:
-        self (class): class with initial values for the parameters
-        
-        Returns: 
-        
-        original_LRAD (list): list of original LRAD curve
-        lras_curve (list): list of LRAS curve
-        plot (plot): plot of AD and AS curves
 
-        
-        Returns: Temporary shocks:
-        
-        ad_curve_t (list): list of AD curves
-        as_curve_t (list): list of AS curves
-        
-        Returns: Permenant shocks:
-        
-        adjusted_LRAD (list): list of adjusted LRAD curve
-        LRAS2 (list): list of LRAS2 curve
-        
-        """
         # a. Create y_values & pi_hat
         
         y_values = np.linspace(-0.01, 0.01, 100)
@@ -178,18 +146,6 @@ class ASAD:
         
     #Stochastic shocks
     def solve_stochastic_shock(self, seed):
-        """
-        args:
-        self (class): class with initial values for the parameters
-        seed (int): seed for random number generator
-
-        returns:
-        
-        self.yhat_vec_stoc (list): list of output gaps
-        self.pi_hat_vec_stoc (list): list of inflation gaps
-        self.t_vec (list): list of periods
-         
-        """
         # a. creaat empty lists % setting parameters
         
         self.z_vector = []
@@ -215,9 +171,7 @@ class ASAD:
 
             self.z_vector.append(self.z)
             self.s_vector.append(self.s)
-        
-        # c. create yhat and pihat vectors
-                
+                       
         for t in range(self.T):
             
             if t == 0:
@@ -230,31 +184,28 @@ class ASAD:
                 yhat = (z - self.alpha * self.pihat_vec_stoc[t - 1] - self.alpha * s) / (1 + self.alpha * self.gamma)
                 pihat = (self.pihat_vec_stoc[t - 1] + self.gamma * z + s) / (1 + self.alpha * self.gamma)
 
-            # e. append to empty lists
             self.yhat_vec_stoc.append(yhat)
             self.pihat_vec_stoc.append(pihat)
             self.t_vec.append(t)
-
-    # creating social loss function & calculating social loss   
+     
     def social_loss_function(self):
         social_loss = 0
-        for t in range(len(self.yhat_vec_stoc)): # Loop through all periods as the discount factor is correctly applied
+        for t in range(len(self.yhat_vec_stoc)): 
             social_loss += self.delta**t * (self.yhat_vec_stoc[t]**2 + self.pihat_vec_stoc[t]**2)
         return social_loss
     
-    # social loss function with alpha as input
     def social_loss_alpha(self, alpha_value, seed):
-        self.alpha = alpha_value # Update the alpha value
-        self.solve_model() # Solve the model
-        self.solve_stochastic_shock(seed) # Solve the model with stochastic shock
-        return self.social_loss_function() # Return the social loss function
+        self.alpha = alpha_value
+        self.solve_model() 
+        self.solve_stochastic_shock(seed) 
+        return self.social_loss_function() 
     
-    def average_social_loss(alpha_value, n_simulations=500): # Average social loss function
-        social_losses = [] # Empty list for social losses
-        for i in range(n_simulations): # Loop through all simulations
-            seed = i # Set seed
-            asad_model = ASAD(T=100, alpha=alpha_value ,gamma=0.075) # Create model
-            asad_model.solve_model() # Solve model
-            asad_model.solve_stochastic_shock(seed) # Solve model with stochastic shock
-            social_losses.append(asad_model.social_loss_function()) # Append social loss to list
-        return np.mean(social_losses) # Return average social loss
+    def average_social_loss(alpha_value, n_simulations=500): 
+        social_losses = [] 
+        for i in range(n_simulations): 
+            seed = i 
+            asad_model = ASAD(T=100, alpha=alpha_value ,gamma=0.075) 
+            asad_model.solve_model() 
+            asad_model.solve_stochastic_shock(seed) 
+            social_losses.append(asad_model.social_loss_function()) 
+        return np.mean(social_losses) 
