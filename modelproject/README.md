@@ -1,6 +1,6 @@
 # Model analysis project
 
-Our project is titled ASAD model for a closed economy and is about how shocks affect the aggregate supply and aggregate demand in a closed economy. Furthermore, we investage and test what the optimal alpha might be, to avoid social losses.
+Our project is titled Solow model for a closed economy with human capital. We 
 
 The **results** of the project can be seen from running [modelproject.ipynb](modelproject.ipynb).
 
