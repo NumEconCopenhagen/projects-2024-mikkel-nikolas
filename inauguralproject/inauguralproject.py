@@ -17,7 +17,7 @@ class InauguralprojectClass:
     def utility_B(self, x1B, x2B):
         return x1B**self.beta * x2B**(1-self.beta)
 
-    def set_C(self, x1A, x2A):
+    def pareto_C(self, x1A, x2A):
         return self.utility_A(x1A, x2A) >= self.utility_A(self.w1A, self.w2A) and \
             self.utility_B(1 - x1A, 1 - x2A) >= self.utility_B(1 - self.w1A, 1 - self.w2A)
 
