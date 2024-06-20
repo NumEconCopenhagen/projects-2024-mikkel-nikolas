@@ -68,14 +68,14 @@ class SolowModel:
     def ef_k_tilde_t(self):
         effective_s_K = self.s_K * (1 - self.tau_K)
         effective_s_H = self.s_H * (1 - self.tau_H)
-        denominator = self.n + self.g + self.delta + self.n * self.delta
+        denominator = self.n + self.g + self.delta + self.n * self.g
         ef_k_tilde_t = ((effective_s_K ** (1 - self.phi) * effective_s_H ** self.phi) / denominator) ** (1 / (1 - self.alpha - self.phi))
         return ef_k_tilde_t
 
     def ef_h_tilde_t(self):
         effective_s_K = self.s_K * (1 - self.tau_K)
         effective_s_H = self.s_H * (1 - self.tau_H)
-        denominator = self.n + self.g + self.delta + self.n * self.delta
+        denominator = self.n + self.g + self.delta + self.n * self.g
         ef_h_tilde_t = ((effective_s_K ** self.alpha * effective_s_H ** (1 - self.alpha)) / denominator) ** (1 / (1 - self.alpha - self.phi))
         return ef_h_tilde_t
 
@@ -126,4 +126,17 @@ class SolowModel:
             k_values[t], h_values[t] = self.ef_solow_model_dynamics(k_values[t-1], h_values[t-1])
         
         return k_values, h_values
+    
+    # phasediagram with tax
+    
+    def h_steady_state_delta_k_zero_tax(self, k):
+        effective_s_K = self.s_K * (1 - self.tau_K)
+        denominator = self.n + self.g + self.delta + self.n * self.g
+        return np.minimum(((denominator / effective_s_K)**(1 / self.phi) * k**((1 - self.alpha) / self.phi)), 100)
+
+    def h_steady_state_delta_h_zero_tax(self, k):
+        effective_s_K = self.s_K * (1 - self.tau_K)
+        effective_s_H = self.s_H * (1 - self.tau_H)
+        denominator = self.n + self.g + self.delta + self.n * self.g
+        return np.minimum((effective_s_H / denominator)**(1 / (1 - self.phi)) * k**(self.alpha / (1 - self.phi)), 100)
 
