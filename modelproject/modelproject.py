@@ -17,12 +17,12 @@ class SolowModel:
         self.tau_H = tau_H
     
     def k_tilde_t(self):
-        denominator = self.n + self.g + self.delta + self.n * self.delta
+        denominator = self.n + self.g + self.delta + self.n * self.g
         k_tilde_t = ((self.s_K ** (1 - self.phi) * self.s_H ** self.phi) / denominator) ** (1 / (1 - self.alpha - self.phi))
         return k_tilde_t
 
     def h_tilde_t(self):
-        denominator = self.n + self.g + self.delta + self.n * self.delta
+        denominator = self.n + self.g + self.delta + self.n * self.g
         h_tilde_t = ((self.s_K ** self.alpha * self.s_H ** (1 - self.alpha)) / denominator) ** (1 / (1 - self.alpha - self.phi))
         return h_tilde_t
 
