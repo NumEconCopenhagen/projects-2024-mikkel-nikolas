@@ -2,7 +2,7 @@
 
 Our project is titled "Development in inflation and relation to real rate" and is about how inflation has developed the last 20 years, and how the real are related to the inflation.
 
-The **results** of the project can be seen from running [dataproject.ipynb]. It is important when running the ipynb file to pres  Run All every time the file run.
+The **results** of the project can be seen from running [dataproject.ipynb]. It is important when running the ipynb file to pres  Run All every time the file run. In order to display our interactive plot run the code in VSCode.
 
 We apply the **following datasets**:
 
