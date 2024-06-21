@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.optimize import root_scalar
 import matplotlib.pyplot as plt
 
 class SolowModel:
