@@ -1,4 +1,4 @@
-# \[Mikkel&Nikolas\]
+# \[ZVG359&RLW277\]
 Our exam portfolio
 
 **This repository contains**  
@@ -9,5 +9,5 @@ Our exam portfolio
 
 **Group members:**
 
-- Mikkel Friis (ZVG359)
-- Nikolas Lindgaard (RLW277)
+- (ZVG359)
+- (RLW277)
