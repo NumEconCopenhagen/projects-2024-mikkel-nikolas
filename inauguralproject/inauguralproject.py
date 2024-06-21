@@ -51,11 +51,11 @@ class InauguralprojectClass:
         return self.utility_A(x1A, x2A) >= self.utility_A(self.w1A, self.w2A) and \
             self.utility_B(1 - x1A, 1 - x2A) >= self.utility_B(1 - self.w1A, 1 - self.w2A)
 
-    def max_u_a(self, x):
+    def neg_max_u_a(self, x):
         # Negative utility function for consumer A for given allocation used for minimization
         return -self.utility_A(x[0], x[1])
 
-    def max_u_ab(self, x):
+    def neg_max_u_ab(self, x):
         # Negative total utility function for both consumers A and B used for minimization
         utility_A = self.utility_A(x[0], x[1])
         utility_B = self.utility_B(1-x[0], 1-x[1])
