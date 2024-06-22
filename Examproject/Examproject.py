@@ -71,10 +71,10 @@ class ProductionEconomy:
         consumer_utility = self.consumer_utility(c1, c2, ell_opt)
         firm_output_p2 = self.firm_output(w, p2)
         return consumer_utility - kappa * firm_output_p2
-
-
-
-class Problem:
+    
+    
+    
+    
     def __init__(self):
         pass
 
