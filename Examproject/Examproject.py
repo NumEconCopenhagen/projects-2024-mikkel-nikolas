@@ -2,21 +2,31 @@ import numpy as np
 from types import SimpleNamespace
 
 class ProductionEconomy:
-    def __init__(self, A=1.0, gamma=0.5, alpha=0.3, nu=1.0, epsilon=2.0):
+    def __init__(self, A=1.0, gamma=0.5, alpha=0.3, nu=1.0, epsilon=2.0, kappa=0.1):
         self.A = A
         self.gamma = gamma
         self.alpha = alpha
         self.nu = nu
         self.epsilon = epsilon
+        self.kappa = kappa
 
     def firm_labor_demand(self, w, pj):
         return ((self.gamma * self.A * pj) / w) ** (1 / (1 - self.gamma))
 
+    def firm1_labor_demand(self, w, p1):
+        return ((self.gamma * self.A * p1) / w) ** (1 / (1 - self.gamma))
+
+    def firm2_labor_demand(self, w, p2):
+        return ((self.gamma * self.A * p2) / w) ** (1 / (1 - self.gamma))
+
     def firm_output(self, w, pj):
         return self.A * self.firm_labor_demand(w, pj) ** self.gamma
-    
-    def firm_output_p2(self, w, p2):
-        return self.A * self.firm_labor_demand(w, p2) ** self.gamma
+
+    def firm1_output_opt(self, w, p1):
+        return self.A * self.firm1_labor_demand(w, p1) ** self.gamma    
+
+    def firm2_output_opt(self, w, p2):
+        return self.A * self.firm2_labor_demand(w, p2) ** self.gamma
 
     def firm_profit(self, w, pj):
         return ((1-self.gamma) / self.gamma) * w * self.firm_labor_demand(w, pj)
@@ -58,8 +68,5 @@ class ProductionEconomy:
         ell_opt = self.consumer_optimal_labor(p1, p2, w, tau, T)
         c1, c2, _ = self.consumer_budget(p1, p2, w, tau, T, ell_opt)
         consumer_utility = self.consumer_utility(c1, c2, ell_opt)
-        firm_output_p2 = self.firm_output_p2(w, p2)
+        firm_output_p2 = self.firm_output(w, p2)
         return consumer_utility - kappa * firm_output_p2
-
-
- 
