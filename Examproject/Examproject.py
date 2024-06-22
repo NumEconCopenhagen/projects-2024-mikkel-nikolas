@@ -117,3 +117,24 @@ class Problem:
         if r is None:
             return None
         return r[0] * values[0] + r[1] * values[1] + r[2] * values[2]
+    
+    def approximate_point(self, X, F, y):
+        indices = {
+        'A': self.find_closest_point_index(X, y, lambda pt, y: pt[0] > y[0] and pt[1] > y[1]),
+        'B': self.find_closest_point_index(X, y, lambda pt, y: pt[0] > y[0] and pt[1] < y[1]),
+        'C': self.find_closest_point_index(X, y, lambda pt, y: pt[0] < y[0] and pt[1] < y[1]),
+        'D': self.find_closest_point_index(X, y, lambda pt, y: pt[0] < y[0] and pt[1] > y[1])
+        }
+
+        if all(idx is not None for idx in indices.values()):
+            points = {key: X[idx] for key, idx in indices.items()}
+            values = {key: F[idx] for key, idx in indices.items()}
+
+        coords_abc = self.point_in_triangle(points['A'], points['B'], points['C'], y)
+        if coords_abc:
+            return self.approximate_value(coords_abc, [values['A'], values['B'], values['C']])
+        else:
+            coords_cda = self.point_in_triangle(points['C'], points['D'], points['A'], y)
+            if coords_cda:
+                return self.approximate_value(coords_cda, [values['C'], values['D'], values['A']])
+        return None
