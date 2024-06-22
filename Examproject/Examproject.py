@@ -1,6 +1,5 @@
 import numpy as np
 from types import SimpleNamespace
-import matplotlib.pyplot as plt
 
 class ProductionEconomy:
     def __init__(self, A=1.0, gamma=0.5, alpha=0.3, nu=1.0, epsilon=2.0, kappa=0.1):
@@ -71,10 +70,8 @@ class ProductionEconomy:
         consumer_utility = self.consumer_utility(c1, c2, ell_opt)
         firm_output_p2 = self.firm_output(w, p2)
         return consumer_utility - kappa * firm_output_p2
-    
-    
-    
-    
+
+class Problem:
     def __init__(self):
         pass
 
