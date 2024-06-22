@@ -1,4 +1,5 @@
 import numpy as np
+from types import SimpleNamespace
 
 class ProductionEconomy:
     def __init__(self, A=1.0, gamma=0.5, alpha=0.3, nu=1.0, epsilon=2.0):
@@ -13,9 +14,9 @@ class ProductionEconomy:
 
     def firm_output(self, w, pj):
         return self.A * self.firm_labor_demand(w, pj) ** self.gamma
-
+    
     def firm_profit(self, w, pj):
-        return (((1-self.gamma) * w) / self.gamma) * self.firm_labor_demand
+        return ((1-self.gamma) / self.gamma) * w * self.firm_labor_demand(w, pj)
 
     def consumer_utility(self, c1, c2, ell):
         return np.log(c1 ** self.alpha * c2 ** (1 - self.alpha)) - self.nu * ell ** (1 + self.epsilon) / (1 + self.epsilon)
@@ -34,4 +35,4 @@ class ProductionEconomy:
                                      ((1 - self.alpha) * income(ell) / (p2 + tau)) ** (1 - self.alpha)) - \
                               self.nu * ell ** (1 + self.epsilon) / (1 + self.epsilon)
         return max((utility(ell), ell) for ell in np.linspace(0, 10, 1000))[1]
-
+    
