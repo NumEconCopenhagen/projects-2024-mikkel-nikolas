@@ -58,6 +58,19 @@ class ProductionEconomy:
         ell_star = self.consumer_optimal_labor(p1, p2, w, tau, T)
         _, c2, _ = self.consumer_budget(p1, p2, w, tau, T, ell_star)
         return c2
+    
+    # Function to check if the market clears at equilibrium prices
+    def test_market_clearing_at_equilibrium(self, p1_star, p2_star, w, tau, T):
+        ell_opt = self.consumer_optimal_labor(p1_star, p2_star, w, tau, T)
+        c1, c2, income = self.consumer_budget(p1_star, p2_star, w, tau, T, ell_opt)
+        y1 = self.firm1_output_opt(w, p1_star)
+        y2 = self.firm2_output_opt(w, p2_star)
+        labor_demand_total = self.firm1_labor_demand(w, p1_star) + self.firm2_labor_demand(w, p2_star)
+        labor_market_clear = np.isclose(ell_opt, labor_demand_total)
+        goods_market1_clear = np.isclose(self.C1_star(p1_star, p2_star, w, tau, T), y1)
+        goods_market2_clear = np.isclose(self.C2_star(p1_star, p2_star, w, tau, T), y2)
+    
+        return labor_market_clear, goods_market1_clear, goods_market2_clear
 
     def calculate_T(self, p1, p2, w, tau):
         c2_star = self.C2_star(p1, p2, w, tau, tau * 0)  # T is initially 0
