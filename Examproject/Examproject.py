@@ -88,7 +88,7 @@ class Problem:
     def __init__(self):
         pass
 
-    def point_in_triangle(self, A, B, C, y):
+    def building_block_1(self, A, B, C, y):
         """Calculate barycentric coordinates and check if point is inside the triangle."""
         A1, A2 = A
         B1, B2 = B
@@ -125,7 +125,7 @@ class Problem:
         triangle = np.array([points[key] for key in keys])
         ax.plot(*np.append(triangle, [triangle[0]], axis=0).T, linestyle='-', color=color, label=label)
     
-    def approximate_value(self, r, values):
+    def algorithm(self, r, values):
         """Approximate the function value given barycentric coordinates and vertex values."""
         if r is None:
             return None
@@ -143,11 +143,11 @@ class Problem:
             points = {key: X[idx] for key, idx in indices.items()}
             values = {key: F[idx] for key, idx in indices.items()}
 
-        coords_abc = self.point_in_triangle(points['A'], points['B'], points['C'], y)
+        coords_abc = self.building_block_1(points['A'], points['B'], points['C'], y)
         if coords_abc:
-            return self.approximate_value(coords_abc, [values['A'], values['B'], values['C']])
+            return self.algorithm(coords_abc, [values['A'], values['B'], values['C']])
         else:
-            coords_cda = self.point_in_triangle(points['C'], points['D'], points['A'], y)
+            coords_cda = self.building_block_1(points['C'], points['D'], points['A'], y)
             if coords_cda:
-                return self.approximate_value(coords_cda, [values['C'], values['D'], values['A']])
+                return self.algorithm(coords_cda, [values['C'], values['D'], values['A']])
         return None
